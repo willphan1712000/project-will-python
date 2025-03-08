@@ -1,0 +1,4 @@
+go to Python and type "pip install pyinstaller"
+go to the folder where your Python file is stored and type cmd
+on the address bar
+then type "pyinstaller --onefile -w name.py" and hit enter
