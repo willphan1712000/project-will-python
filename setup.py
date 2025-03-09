@@ -5,7 +5,7 @@ with open("README.md", "r") as f:
 
 setup(
     name = 'willphanpy',
-    version = '0.0.8',
+    version = '0.0.9',
     packages=find_packages(),
     install_requires=[
         "numpy",
