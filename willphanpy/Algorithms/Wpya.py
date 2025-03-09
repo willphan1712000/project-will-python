@@ -179,19 +179,39 @@ class Wpya:
 
 
     @staticmethod
-    def sort(arr: list, algorithm: str):
+    def sort(arr: list, algorithm: str = "heap"):
         r"""
-        This sorting function implements multiple sorting algorithms with varying time complexities: 
-        O(n log n), O(kn), and O(n²).
+        This sorting function implements multiple sorting algorithms
+        Quick sort : O(nlogn) -> algorithm = 'quick'
+        Merge sort : O(nlogn) -> algorithm = 'merge'
+        Heap sort : O(nlogn) -> algorithm = 'heap'
+        Radix sort : O(kn) -> algorithm = 'radix'
+        Insertion sort : O(n2) -> algorithm = 'insertion'
+        Selection sort : O(n2) -> algorithm = 'selection'
 
         @param arr: The list to be sorted.
-        @param algorithm: The sorting algorithm to be used.
+        @param algorithm: The sorting algorithm to be used. Default is heap sort
         @return: None. The input list is sorted in place.
         """
         match(algorithm):
             case 'quick':
                 from .sorting.quickSort import quickSort as qs
                 qs(arr)
+            case 'merge':
+                from .sorting.merge import mergeSort as ms
+                ms(arr)
+            case 'insertion':
+                from .sorting.insertion import insertion as ise
+                ise(arr)
+            case 'selection':
+                from .sorting.selection import selection as ss
+                ss(arr)
+            case 'heap':
+                from .sorting.heap import heap as hs
+                hs(arr)
+            case 'radix':
+                from .sorting.radix import radix as rs
+                rs(arr)
 
     @staticmethod
     def maxSlidingWindow(arr: list[int], k: int) -> list[int]:
@@ -245,4 +265,11 @@ class Wpya:
                 p2 -= 1
 
         return False
+
+    @staticmethod
+    # swap function
+    def swap(arr, i, j):
+        temp = arr[i]
+        arr[i] = arr[j]
+        arr[j] = temp
                 
