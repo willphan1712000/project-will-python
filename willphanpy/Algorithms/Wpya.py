@@ -203,6 +203,9 @@ class Wpya:
             case 'insertion':
                 from .sorting.insertion import insertion as ise
                 ise(arr)
+            case 'selection':
+                from .sorting.selection import selection as ss
+                ss(arr)
             case _:
                 return sorted(arr)
 
