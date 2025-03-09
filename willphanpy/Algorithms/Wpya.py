@@ -184,8 +184,8 @@ class Wpya:
         This sorting function implements multiple sorting algorithms
         Quick sort : O(nlogn) -> algorithm = 'quick'
         Merge sort : O(nlogn) -> algorithm = 'merge'
-        Heap sort : O() -> algorithm = 'heap'
-        Radix sort : O() -> algorithm = 'radix'
+        Heap sort : O(nlogn) -> algorithm = 'heap'
+        Radix sort : O(kn) -> algorithm = 'radix'
         Insertion sort : O(n2) -> algorithm = 'insertion'
         Selection sort : O(n2) -> algorithm = 'selection'
 
@@ -206,6 +206,11 @@ class Wpya:
             case 'selection':
                 from .sorting.selection import selection as ss
                 ss(arr)
+            case 'heap':
+                from .sorting.heap import heap as hs
+                hs(arr)
+            case 'radix':
+                pass
             case _:
                 return sorted(arr)
 
