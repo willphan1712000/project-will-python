@@ -5,4 +5,4 @@ from .Aerodynamics.Wpyaero import Wpyaero
 from .MachineLearning.Wpyml import Wpyml
 from .Testing.TeseCase import TestCase
 
-__all__ = ["Wpya", "Wpyd", "Wpyaero", "Wpyml"]
+__all__ = ["Wpya", "Wpyd", "Wpyaero", "Wpyml", "TestCase"]
