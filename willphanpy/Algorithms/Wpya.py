@@ -200,7 +200,9 @@ class Wpya:
             case 'merge':
                 from .sorting.merge import mergeSort as ms
                 ms(arr)
-
+            case 'insertion':
+                from .sorting.insertion import insertion as ise
+                ise(arr)
             case _:
                 return sorted(arr)
 
