@@ -179,7 +179,7 @@ class Wpya:
 
 
     @staticmethod
-    def sort(arr: list, algorithm: str):
+    def sort(arr: list, algorithm: str = "heap"):
         r"""
         This sorting function implements multiple sorting algorithms
         Quick sort : O(nlogn) -> algorithm = 'quick'
@@ -190,7 +190,7 @@ class Wpya:
         Selection sort : O(n2) -> algorithm = 'selection'
 
         @param arr: The list to be sorted.
-        @param algorithm: The sorting algorithm to be used.
+        @param algorithm: The sorting algorithm to be used. Default is heap sort
         @return: None. The input list is sorted in place.
         """
         match(algorithm):
@@ -210,9 +210,8 @@ class Wpya:
                 from .sorting.heap import heap as hs
                 hs(arr)
             case 'radix':
-                pass
-            case _:
-                return sorted(arr)
+                from .sorting.radix import radix as rs
+                rs(arr)
 
     @staticmethod
     def maxSlidingWindow(arr: list[int], k: int) -> list[int]:
