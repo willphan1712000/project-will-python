@@ -1,3 +1,6 @@
+import numpy
+import pandas
+
 class Wpya:
     def __init__(self):
         pass
@@ -84,14 +87,11 @@ class Wpya:
     @staticmethod
     def read_excel(file: str):
         # Reading the Excel file
-        data = pd.read_excel(file)
+        data = pandas.read_excel(file)
 
         # Display the first few rows
         return data.to_numpy()
     
-    @staticmethod
-    def randomInt(fromNumber: int, toNumber: int, size: int):
-        return np.random.randint(fromNumber, toNumber + 1, size)
 
     # Algorithm that converts infix expression to postfix expression
     @staticmethod
@@ -171,5 +171,18 @@ class Wpya:
         return stack.pop()
 
 
-def sayHello():
-    print("Hello Will...")
+    @staticmethod
+    def sort(arr: list, algorithm: str):
+        r"""
+        This sorting function implements multiple sorting algorithms with varying time complexities: 
+        O(n log n), O(kn), and O(n²).
+
+        @param arr: The list to be sorted.
+        @param algorithm: The sorting algorithm to be used.
+        @return: None. The input list is sorted in place.
+        """
+        match(algorithm):
+            case 'quick':
+                from .sorting.quickSort import quickSort as qs
+                qs(arr)
+                
