@@ -1,5 +1,6 @@
 import numpy
 import pandas
+from collections import deque
 
 class Wpya:
     def __init__(self):
@@ -96,6 +97,9 @@ class Wpya:
     # Algorithm that converts infix expression to postfix expression
     @staticmethod
     def infixToPostfix(infix: str) -> str:
+        r"""
+        This method is used to convert infix expression to postfix expression
+        """
         power1 = ['+', '-']
         power2 = ['*', '/']
         parenthesis = ['(', ')']
@@ -143,6 +147,9 @@ class Wpya:
     # Algorithm that converts postfix expression back to infix expression
     @staticmethod
     def evaluatePostfix(postfix: str) -> int:
+        r"""
+        This method is used to evaluate postfix expression
+        """
         stack = []
         power1 = ['+', '-']
         power2 = ['*', '/']
@@ -185,4 +192,57 @@ class Wpya:
             case 'quick':
                 from .sorting.quickSort import quickSort as qs
                 qs(arr)
+
+    @staticmethod
+    def maxSlidingWindow(arr: list[int], k: int) -> list[int]:
+        r"""
+        This methos is to find maximum value of a k window (window size of k) sliding across the arr list
+        """
+        n = len(arr)
+        result = []
+        d = deque()
+        i = 0 # Sliding window
+        j = 0 # Slding window element
+
+        while(i <= n - k):
+            while(j <= i + k - 1):
+                if(not d):
+                    d.append(j)
+                else:
+                    while(d and arr[d[-1]] < arr[j]):
+                        d.pop()
+
+                    d.append(j)
+
+                j += 1
+            
+            result.append(arr[d[0]])
+            i += 1
+            if(d[0] < i):
+                d.popleft()
+        
+        return result
+
+    @staticmethod
+    def two_pointers(set, target):
+        r"""
+        The problem is given a sorted set of numbers and a target. Find two numbers in the set that add up to the target
+        @param set : a SORTED list of number
+        @param target : a target number
+        @return a list of the first number and the second number that add up to the target if found
+        @ return False if not found
+        """
+        p1 = 0 # set pointer 1 to the beginning of the set
+        p2 = len(set) - 1 # set pointer 2 to the end of the set
+
+        while(p1 < p2):
+            sum = set[p1] + set[p2]
+            if(sum == target):
+                return [set[p1], set[p2]]
+            elif(sum < target):
+                p1 += 1
+            else:
+                p2 -= 1
+
+        return False
                 
