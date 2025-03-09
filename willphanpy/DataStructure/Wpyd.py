@@ -1,6 +1,7 @@
 from .Queue.Queue import Queue
 from .Queue.Deque import Deque
 from .Tree import Tree
+import random
 
 class Wpyd:
     @staticmethod
@@ -22,5 +23,11 @@ class Wpyd:
         """
         return Tree()
 
+    @staticmethod
+    def randomInt(fromNumber: int, toNumber: int, shuffle = False) -> list:
+        arr = list(range(fromNumber, toNumber + 1))
+        if shuffle:
+            random.shuffle(arr)
+            return arr
 
-__all__ = ['Deque', 'Queue', 'Tree']
+        return arr

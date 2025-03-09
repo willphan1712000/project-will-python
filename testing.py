@@ -1,19 +1,34 @@
 import unittest
+from willphanpy import Wpya as a
+from willphanpy import Wpyd as d
 
-from Wp import Wp
 # class inheritance in python
-class TestWp1(unittest.TestCase):
-    def test_postfix1(self):
-        self.assertEqual(Wp.infixToPostfix("a*(b+c)-d/e"), "abc+*de/-")
-    def test_postfix2(self):
-        self.assertEqual(Wp.infixToPostfix("(a-b)*c"), "ab-c*")
-
-    def test_evaluation1(self):
-        self.assertEqual(Wp.evaluatePostfix(Wp.infixToPostfix("(2+3)*5")), 25)
-    def test_evaluation2(self):
-        self.assertEqual(Wp.evaluatePostfix(Wp.infixToPostfix("2+(3+1)*2")), 10)
-    def test_evaluation3(self):
-        self.assertEqual(Wp.evaluatePostfix(Wp.infixToPostfix("2+(1+4)+6/3")), 9)
+class SortTesting(unittest.TestCase):
+    def test1(self):
+        arr = d.randomInt(1,50, shuffle=True)
+        a.sort(arr, algorithm='quick')
+        correct = d.randomInt(1,50)
+        self.assertEqual(arr, correct)
+    def test2(self):
+        arr = d.randomInt(1,50, shuffle=True)
+        a.sort(arr, algorithm='quick')
+        correct = d.randomInt(1,50)
+        self.assertEqual(arr, correct)
+    def test3(self):
+        arr = d.randomInt(1,50, shuffle=True)
+        a.sort(arr, algorithm='quick')
+        correct = d.randomInt(1,50)
+        self.assertEqual(arr, correct)
+    def test4(self):
+        arr = d.randomInt(1,50, shuffle=True)
+        a.sort(arr, algorithm='quick')
+        correct = d.randomInt(1,50)
+        self.assertEqual(arr, correct)
+    def test5(self):
+        arr = d.randomInt(1,50, shuffle=True)
+        a.sort(arr, algorithm='quick')
+        correct = d.randomInt(1,50)
+        self.assertEqual(arr, correct)
 
 if __name__ == '__main__':
     unittest.main()
