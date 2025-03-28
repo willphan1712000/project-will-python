@@ -1,4 +1,4 @@
-import numpy
+import sympy as sym
 import pandas
 from collections import deque
 
@@ -272,4 +272,20 @@ class Wpya:
         temp = arr[i]
         arr[i] = arr[j]
         arr[j] = temp
+
+    @staticmethod
+    def DFS(adjacency_list: dict[str, list[str]], startNode: str) -> list:
+        r"""
+        Define a Depth First Search function. This will search as deep as possible on the left side of the graph
+        """
+        from .uninformedSearch.DFS import DFS
+        return DFS(adjacency_list, startNode)
+    
+    @staticmethod
+    def BFS(adjacency_list: dict[str, list[str]], startNode: str) -> list:
+        r"""
+        Define a Breadth First Search function. This will search down the graph level by level
+        """
+        from .uninformedSearch.BFS import BFS
+        return BFS(adjacency_list, startNode)
                 
