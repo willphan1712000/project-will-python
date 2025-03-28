@@ -1,7 +1,9 @@
 # heap sort
+# O(nlogn)
 
 from ..Wpya import Wpya
 
+# O(log)
 def heapify(arr, i, n):
     l = 2*i + 1 # left child of node i
     r = 2*i + 2 # right child of node i
@@ -25,9 +27,13 @@ def buildMaxHeap(arr):
     for i in range(lastNonLeaf, -1, -1):
         heapify(arr, i, n)
 
+    # for loop O(nlogn)
+
 def heap(arr):
-    buildMaxHeap(arr)
+    buildMaxHeap(arr) # O(nlogn)
 
     for i in range(len(arr) - 1, -1, -1):
         Wpya.swap(arr, 0, i) # the first element is the largest element after building max heap
-        heapify(arr, 0, i)
+        heapify(arr, 0, i) # O(logn)
+
+    # for loop O(nlogn)
