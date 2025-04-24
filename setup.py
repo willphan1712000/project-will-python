@@ -5,13 +5,11 @@ with open("README.md", "r") as f:
 
 setup(
     name = 'willphanpy',
-    version = '0.2.0',
+    version = '0.3.0',
     packages=find_packages(),
     install_requires=[
         "numpy",
-        "torch",
         "matplotlib",
-        "pandas"
     ],
     long_description=description,
     long_description_content_type = "text/markdown"
