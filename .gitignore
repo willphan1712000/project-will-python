@@ -11,3 +11,5 @@ build/
 dist/
 
 willphanpy.egg-info/
+
+test_data/
