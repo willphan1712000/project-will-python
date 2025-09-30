@@ -8,6 +8,7 @@
 - Python Data Structure
 - Python Algorithm
 - Python Machine Learning
+  - Data structure mostly used is numpy array
 - Python unit testing
 
 ## Technology
