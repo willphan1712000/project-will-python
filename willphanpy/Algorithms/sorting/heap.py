@@ -29,7 +29,11 @@ def buildMaxHeap(arr):
 
     # for loop O(nlogn)
 
-def heap(arr):
+def heap(arr: list) -> list:
+    '''
+    - Heap sort
+    - Time complexity O(nlogn)
+    '''
     buildMaxHeap(arr) # O(nlogn)
 
     for i in range(len(arr) - 1, -1, -1):
