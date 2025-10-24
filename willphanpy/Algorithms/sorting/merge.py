@@ -17,8 +17,6 @@
 # (i)     (j)
 #  i   <   j
 
-from ..Wpya import Wpya
-
 def merge(arr, arr_left, arr_right):
     i, j, k = 0, 0, 0
 
@@ -41,8 +39,11 @@ def merge(arr, arr_left, arr_right):
         j += 1
         k += 1
 
-
 def mergeSort(arr: list):
+    '''
+    - Merge sort
+    - Time complexity O(nlogn)
+    '''
     if(len(arr) == 1):
         return
 
@@ -57,5 +58,5 @@ def mergeSort(arr: list):
     mergeSort(arr_left)
     mergeSort(arr_right)
 
-    merge(arr, arr_left, arr_right)
+    merge(arr, arr_left, arr_right) # O(n)
     
