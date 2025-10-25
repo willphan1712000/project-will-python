@@ -10,7 +10,7 @@ def init(word1: str, word2: str) -> list:
 
     return cache
 
-def editDistance(word1: str, word2: str) -> list:
+def editDistance(word1: str, word2: str):
     cache = init(word1=word1, word2=word2) # correct
 
     def helper_r(i, j):
