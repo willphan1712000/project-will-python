@@ -20,6 +20,7 @@ class TFIDF:
         self.corpus: list[str] = corpus
         self.__tp_list: list[TextPreprocessing] = []
         self.vocabulary: dict[str, float]= {}
+        self.vocabList: list[str] = []
 
         self.tf_list = []
         self.tf_vector = []
@@ -44,9 +45,12 @@ class TFIDF:
             for token in tp.tokens:
                 self.vocabulary[token] = 0
 
-    def computeTF(self) -> list[dict]:
+        for key in self.vocabulary:
+            self.vocabList.append(key)
+
+    def computeTF(self):
         '''
-        Computer TF score for each word in the vocabulary
+        Compute TF score for each word in the vocabulary
         '''
 
         for tp in progress(self.__tp_list, desc="TF in progress"):
