@@ -1,5 +1,9 @@
 import numpy as np
 
+__all__ = [
+    "Softmax"
+]
+
 class Softmax:
     '''
     Softmax activation function

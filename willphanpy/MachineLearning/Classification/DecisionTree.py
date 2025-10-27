@@ -1,5 +1,9 @@
 import numpy as np
 
+__all__ = [
+    "Decision_Tree"
+]
+
 class Node:
   def __init__(self, feature_idx = None, threshold = None, info_gain = None, left = None, right = None, value = None, depth = 0): # depth = 0 -> root node
     self.feature_idx = feature_idx

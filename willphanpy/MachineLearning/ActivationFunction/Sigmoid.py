@@ -1,5 +1,9 @@
 import numpy as np
 
+__all__ = [
+    "Sigmoid"
+]
+
 class Sigmoid:
     '''
     Sigmoid activation function

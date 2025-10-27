@@ -1,5 +1,9 @@
 from .Queue.Queue import Queue
 
+__all__ = [
+    "Tree"
+]
+
 class Node:
     def __init__(self, data):
         self.data = data 

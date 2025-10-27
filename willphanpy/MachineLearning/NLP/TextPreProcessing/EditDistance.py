@@ -1,3 +1,8 @@
+
+__all__ = [
+    "editDistance"
+]
+
 def init(word1: str, word2: str) -> list:
     # create cache (2D array) and initialize with all 0s
     cache = [[0 for _ in range(len(word2)+1)] for _ in range(len(word1)+1)]

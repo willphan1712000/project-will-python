@@ -1,7 +1,12 @@
 import numpy as np
 
+from tqdm import tqdm as progress
 from collections import Counter
 from willphanpy.MachineLearning.NLP.TextPreProcessing.TextPreprocessing import TextPreprocessing
+
+__all__ = [
+    "TFIDF"
+]
 
 class TFIDF:
     '''
@@ -44,7 +49,7 @@ class TFIDF:
         Computer TF score for each word in the vocabulary
         '''
 
-        for tp in self.__tp_list:
+        for tp in progress(self.__tp_list, desc="TF in progress"):
             temp = self.vocabulary.copy()
             vector = []
 
@@ -65,7 +70,7 @@ class TFIDF:
         - use natural log for IDF score
         '''
 
-        for tp in self.__tp_list:
+        for tp in progress(self.__tp_list, desc="IDF in progress"):
             temp = self.vocabulary.copy()
             vector = []
 

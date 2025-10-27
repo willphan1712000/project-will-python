@@ -1,6 +1,10 @@
 import string
 from willphanpy.MachineLearning.NLP.TextPreProcessing.EditDistance import editDistance
 
+__all__ = [
+    "TextPreprocessing"
+]
+
 class TextPreprocessing:
     '''
     Pre-Processing techniques for Natural Language Processing

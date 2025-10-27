@@ -1,6 +1,10 @@
 import numpy as np
 from collections import Counter
 
+__all__ = [
+    "kNN"
+]
+
 class kNN:
   '''
   k nearest neighbors

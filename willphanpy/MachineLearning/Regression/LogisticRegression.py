@@ -2,6 +2,10 @@ import numpy as np
 from willphanpy.MachineLearning.Regression.LinearRegression import Linear_Regression
 from willphanpy.MachineLearning.ActivationFunction.Sigmoid import Sigmoid
 
+__all__ = [
+    "Logistic_Regression"
+]
+
 class Logistic_Regression(Linear_Regression):
     def __init__(self, function = Sigmoid, threshold = 0.5, method = 'normal', epochs = 1000, lr = 0.001):
         super().__init__(method, iterations=epochs, learning_rate=lr)
