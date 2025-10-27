@@ -1,5 +1,9 @@
 import string
-from collections import Counter
+from willphanpy.MachineLearning.NLP.TextPreProcessing.EditDistance import editDistance
+
+__all__ = [
+    "TextPreprocessing"
+]
 
 class TextPreprocessing:
     '''
@@ -8,7 +12,6 @@ class TextPreprocessing:
     def __init__(self, text: str = ""):
         self.text = text
         self.tokens = []
-        self.emotions = []
 
     def readFile(self, filename):
         '''
@@ -16,24 +19,9 @@ class TextPreprocessing:
         '''
         self.text = open(filename, encoding='utf-8').read()
 
-    def analyzeEmotion(self, filename):
-        '''
-        Read an emotion list and analyze emotions based on the emotion list
-        '''
-        with open(filename) as file:
-            for line in file:
-                line = line.replace('\n', '').replace(',', '').replace("'", '').strip()
-                word, emotion = line.split(":")
-                
-                if word in self.tokens:
-                    self.emotions.append(emotion.strip())
-
-            self.emotions = Counter(self.emotions)
-
-
     def preprocess(self):
         '''
-        Pre-processing methods
+        Pre-processing steps
         - Convert all words into lowercase
         - Remove punctuation
         - Tokenization -> store words from a sentence to an array
@@ -90,3 +78,9 @@ class TextPreprocessing:
                 new_tokens.append(word)
         
         self.tokens = new_tokens
+
+    def editDistance(self, word1: str, word2: str) -> list:
+        '''
+        Compute edit distance from two words -> how many operations (add, replace, delete) are needed to transform a word to another
+        '''
+        return editDistance(word1=word1, word2=word2)

@@ -1,5 +1,9 @@
 import numpy as np
 
+__all__ = [
+    "Time_Series"
+]
+
 class Time_Series():
   '''
   Time series model

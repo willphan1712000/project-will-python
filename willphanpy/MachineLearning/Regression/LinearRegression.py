@@ -1,5 +1,9 @@
 import numpy as np
 
+__all__ = [
+    "Linear_Regression"
+]
+
 class Linear_Regression:
   def __init__(self, method = 'normal', iterations = 1000, learning_rate = 0.001):
     '''

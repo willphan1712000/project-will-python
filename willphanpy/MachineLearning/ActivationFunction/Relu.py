@@ -1,5 +1,9 @@
 import numpy as np
 
+__all__ = [
+    "Relu"
+]
+
 class Relu:
     '''
     Relu activation function

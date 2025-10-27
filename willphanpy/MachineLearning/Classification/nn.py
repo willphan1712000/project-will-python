@@ -1,5 +1,9 @@
 import numpy as np
 
+__all__ = [
+    "nn"
+]
+
 class Layer:
     def __init__(self, n_inputs, n_neurons):
         np.random.seed(42)
