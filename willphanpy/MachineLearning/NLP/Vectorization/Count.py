@@ -1,5 +1,6 @@
 import willphanpy
 from collections import Counter
+from tqdm import tqdm as progress
 
 __all__ = [
     "Count"
@@ -33,7 +34,7 @@ class Count:
         '''
         Perform count operation
         '''
-        for doc in self.__corpus:
+        for doc in progress(self.__corpus, desc="Vectorize the corpus"):
             self.__tp.text = doc
             self.__tp.preprocess()
             vector = []
@@ -47,11 +48,11 @@ class Count:
             self.__count.append(count)
 
         # make vocab list based on dictionary
-        for key in self.__dictionary:
+        for key in progress(self.__dictionary, desc="Making vocabulary list"):
             self.__vocabulary.append(key)
 
         # make vector list based on dictionary + count
-        for count in self.__count:
+        for count in progress(self.__count, desc="Making vector list"):
             vector = []
             for key in self.__dictionary:
                 if key in count:
