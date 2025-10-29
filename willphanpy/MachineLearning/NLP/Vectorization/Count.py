@@ -1,6 +1,8 @@
+from numpy.typing import NDArray
 import willphanpy
 from collections import Counter
 from tqdm import tqdm as progress
+import numpy as np
 
 __all__ = [
     "Count"
@@ -22,13 +24,13 @@ class Count:
     '''
 
     def __init__(self, corpus: list[str] = []):
-        self.__corpus: list[str] = corpus # store corpus
-        self.__dictionary: dict(str, int) = {} # store vocabulary in dictionary
+        self.__corpus = np.array(corpus) # store corpus
+        self.__dictionary: dict[str, int] = {} # store vocabulary in dictionary
         self.__vocabulary: list[str] = [] # vocabulary list - features
-        self.__count: list[dict(str, int)] = [] # count for entire corpus
-        self.__vector: list[list[int]] = [] # vector for entire corpus
+        self.__count: list[Counter] = [] # count for entire corpus
+        self.__vector: NDArray = None # vector for entire corpus
 
-        self.__tp = willphanpy.TextPreprocessing()
+        self.__tp = willphanpy.TextPreprocessing() # Text preprocessing from willphanpy library
 
     def makeCount(self):
         '''
@@ -48,20 +50,16 @@ class Count:
             self.__count.append(count)
 
         # make vocab list based on dictionary
-        for key in progress(self.__dictionary, desc="Making vocabulary list"):
-            self.__vocabulary.append(key)
+        self.__vocabulary = list(self.__dictionary.keys())
 
-        # make vector list based on dictionary + count
-        for count in progress(self.__count, desc="Making vector list"):
-            vector = []
-            for key in self.__dictionary:
-                if key in count:
-                    vector.append(count[key])
-                else:
-                    vector.append(0)
+        # dictionary that maps each vocab to its index
+        vocab_index = {word: i for i, word in enumerate(self.__vocabulary)}
 
-            self.__vector.append(vector)
-
+        # make vector list based on dictionary + count, this is the dataset with desired format
+        self.__vector = np.zeros((len(self.__count), len(self.__vocabulary)), dtype=int)
+        for row, count in enumerate(progress(self.__count, desc="Making vector list")):
+            for word, number in count.items():
+                self.__vector[row, vocab_index[word]] = number
 
     def getCorpus(self):
         '''
@@ -70,7 +68,7 @@ class Count:
         return self.__corpus
 
     def getVector(self):
-        'Retrive vectorized words'
+        'Retrive vectorized words in numpy array format'
         return self.__vector
 
     def getVocabulary(self):
