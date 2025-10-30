@@ -39,7 +39,6 @@ class Count:
         for doc in progress(self.__corpus, desc="Vectorize the corpus"):
             self.__tp.text = doc
             self.__tp.preprocess()
-            vector = []
 
             # add NEW vocab to the vocabulary dictionary
             for token in self.__tp.tokens:

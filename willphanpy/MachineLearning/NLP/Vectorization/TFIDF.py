@@ -1,6 +1,4 @@
 import numpy as np
-
-from tqdm import tqdm as progress
 from collections import Counter
 from willphanpy.MachineLearning.NLP.TextPreProcessing.TextPreprocessing import TextPreprocessing
 
@@ -8,102 +6,86 @@ __all__ = [
     "TFIDF"
 ]
 
-class TFIDF:
+class TFIDF():
     '''
     Term Frequency - Inverse Document Frequency
     - TF: compute by how many times a word appears in a sentence divided by the total number of words in that sentence, determining how common the word is in the context of the sentence
     - IDF: compute by log( number of documents in a corpus divided by how many documents that have a word, determining how common the word is across all documents
     - TF-IDF score is a statistical measure that reflects the importance or relevance of a term (word) in a specific document relative to a large collection of documents (the corpus).
+    - TF-IDF is built on top of Bag of Word technique
     '''
 
-    def __init__(self, corpus: list[str] = []):
-        self.corpus: list[str] = corpus
-        self.__tp_list: list[TextPreprocessing] = []
-        self.vocabulary: dict[str, float]= {}
-        self.vocabList: list[str] = []
+    def __init__(self):
+        self.__corpus = []
+        self.__dictionary: dict[str, int] = {}
+        self.__vocabulary: list[str] = []
 
-        self.tf_list = []
-        self.tf_vector = []
+        self.__tf_vector = []
 
-        self.idf_list = []
-        self.idf_vector = []
+        self.__idf_vector = []
 
-        self.score = []
+        self.__tfidf = []
 
-        self.__getVocabulary()
+        self.__tf_count: list[Counter] = [] # count for entire corpus
 
-    def __getVocabulary(self):
-        '''
-        Extract vocabulary from the corpus after text preprocessing
-        - Each document in corpus has its own text preprocessing object
-        '''
-        for doc in self.corpus:
-            tp = TextPreprocessing(doc)
-            tp.preprocess()
+    def fit(self, corpus: list[str] = []):
+        self.__corpus = corpus
+        self.__computeTF()
 
-            self.__tp_list.append( tp )
-            for token in tp.tokens:
-                self.vocabulary[token] = 0
-
-        for key in self.vocabulary:
-            self.vocabList.append(key)
-
-    def computeTF(self):
+    def __computeTF(self):
         '''
         Compute TF score for each word in the vocabulary
         '''
+        tp = TextPreprocessing()
 
-        for tp in progress(self.__tp_list, desc="TF in progress"):
-            temp = self.vocabulary.copy()
-            vector = []
+        for doc in self.__corpus:
+            tp.text = doc
+            tp.preprocess()
 
-            counter = Counter(tp.tokens)
-            for key in counter:
-                temp[key] = counter[key] / len(tp.tokens)
+            # add NEW vocab to the vocabulary dictionary
+            for token in tp.tokens:
+                self.__dictionary[token] = 0
 
-            self.tf_list.append(temp)
+            # add counter for current doc tokens to count
+            count = Counter(tp.tokens)
+            total = sum(count.values())
 
-            for key in temp:
-                vector.append(temp[key])
+            self.__tf_count.append({ key : val / total for key, val in count.items()} )
 
-            self.tf_vector.append(vector)
+        # make vocab list based on dictionary
+        self.__vocabulary = list(self.__dictionary.keys())
 
-    def computeIDF(self):
+        # dictionary that maps each vocab to its index
+        vocab_index = {word: i for i, word in enumerate(self.__vocabulary)}
+
+        # make vector list based on dictionary + count, this is the dataset with float64 format
+        self.__tf_vector = np.zeros((len(self.__tf_count), len(self.__vocabulary)), dtype=np.float64)
+        for row, count in enumerate(self.__tf_count):
+            for word, number in count.items():
+                self.__tf_vector[row, vocab_index[word]] = number
+
+        
+    def __computeIDF(self):
         '''
         Compute IDF score for each word in the vocabulary
         - use natural log for IDF score
         '''
+        pass
 
-        for tp in progress(self.__tp_list, desc="IDF in progress"):
-            temp = self.vocabulary.copy()
-            vector = []
-
-            for token in tp.tokens:
-                count = 0
-                
-                for tp in self.__tp_list:
-                    if token in tp.tokens:
-                        count += 1
-
-                temp[token] = np.log( len(self.corpus) / count )
-                
-            self.idf_list.append(temp)
-
-            for key in temp:
-                vector.append(temp[key])
-
-            self.idf_vector.append(vector)
-
-    def computeTFIDF(self):
+    def __computeTFIDF(self):
         '''
         Compute TF-IDF score by element-wise multiplying TF vector and IDF vector
         '''
-        self.score = np.multiply(
-            np.array(self.tf_vector),
-            np.array(self.idf_vector)
-        )
+        pass
 
-            
+    def getCorpus(self):
+        '''
+        Retrieve corpus
+        '''
+        return self.__corpus
+
+    def getTFVector(self):
+        return self.__tf_vector
 
             
             
