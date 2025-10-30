@@ -1,10 +1,25 @@
 import numpy as np
 from collections import Counter
 from willphanpy.MachineLearning.NLP.TextPreProcessing.TextPreprocessing import TextPreprocessing
+from tqdm import tqdm
 
 __all__ = [
     "TFIDF"
 ]
+
+def progress_bar_generation(corpus, desc):
+    '''
+    Method to generate progress bar
+    '''
+    def document_generator(data):
+        for doc in data:
+            yield doc
+
+    doc_gen = document_generator(corpus)
+
+    progress_bar = tqdm(doc_gen, total=len(corpus), desc= desc)
+
+    return progress_bar
 
 class TFIDF():
     '''
@@ -29,7 +44,7 @@ class TFIDF():
         self.__tf_count: list[Counter] = [] # count for entire corpus
 
     def fit(self, corpus: list[str] = []):
-        self.__corpus = corpus
+        self.__corpus = progress_bar_generation(corpus, desc="Vectoring the corpus")
         self.__computeTF()
 
     def __computeTF(self):
